@@ -61,10 +61,10 @@ angular.module('app.controllers', ['ngMaterial'])
    
 .controller('menuloginCtrl', function($scope, $window, LoginService, $state) {
 
-	if (! localStorage.reload) {
-		localStorage.setItem("reload","true");
-		window.location.reload();
-	}
+	// if (! localStorage.reload) {
+	// 	localStorage.setItem("reload","true");
+	// 	window.location.reload();
+	// }
 	$scope.data = {};
 	var name =(window.localStorage.getItem("dhaussjauhxdjuzlgzuglscfasshdausdjfkjzasd")) ;
 	var pass =(window.localStorage.getItem("uhadlfdlfgghfrejajkfdfhzjudfakjhbfkjagfjufug")) ;
@@ -93,7 +93,7 @@ angular.module('app.controllers', ['ngMaterial'])
 
 })  
 
-.controller('logoutCtrl', function($scope,$state,$window,$ionicPopup) {	
+.controller('logoutCtrl', function($scope,$state,$window,$ionicPopup,$ionicSideMenuDelegate,$ionicHistory) {	
 
 	$scope.logOut = function() {
       var confirmPopup = $ionicPopup.confirm({
@@ -105,7 +105,10 @@ angular.module('app.controllers', ['ngMaterial'])
          if(res) {
 			$window.localStorage.clear();
 			$state.go('menulogin');
-			window.location.reload();
+			$ionicSideMenuDelegate.toggleLeft();
+			$ionicHistory.clearHistory();
+			$ionicHistory.clearCache();
+			// window.location.reload();
          } else {
             console.log('batal');
          }
